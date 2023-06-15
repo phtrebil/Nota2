@@ -37,7 +37,7 @@ class ListaNotasActivity : AppCompatActivity() {
         configuraFab()
         configuraRecyclerView()
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            launch {
                 atualizaTudo()
             }
             repeatOnLifecycle(Lifecycle.State.STARTED) {

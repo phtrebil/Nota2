@@ -36,6 +36,7 @@ class ListaNotasActivity : AppCompatActivity() {
         setContentView(binding.root)
         configuraFab()
         configuraRecyclerView()
+        configuraSwipeRefresh()
         lifecycleScope.launch {
             launch {
                 atualizaTudo()
@@ -46,8 +47,17 @@ class ListaNotasActivity : AppCompatActivity() {
         }
     }
 
+    private fun configuraSwipeRefresh() {
+        binding.activityListaNotasSwipe.setOnRefreshListener {
+            lifecycleScope.launch {
+                atualizaTudo()
+                binding.activityListaNotasSwipe.isRefreshing = false
+            }
+        }
+    }
+
     private suspend fun atualizaTudo() {
-        repository.atualizaTodas()
+        repository.sincroniza()
     }
 
     private fun configuraFab() {
